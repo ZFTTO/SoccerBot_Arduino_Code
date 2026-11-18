@@ -17,7 +17,7 @@ const int kickerPin = 4;
 
 // 2. variable
 int currentSpeed = 180; 
-const char *ssid = "LuluLab_button9";
+const char *ssid = "LuluLab_button";
 const char *password = "12345678";
 
 WebServer server(80);

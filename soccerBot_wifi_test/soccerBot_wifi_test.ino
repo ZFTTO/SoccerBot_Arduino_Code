@@ -1,3 +1,9 @@
+/*
+ESP32 Web SoccerBot Controller (motor + 360servo)
+WiFi + WebServer web remote UI with pointer-event touch buttons
+Libraries: ESP32 Core, ESP32Servo
+*/
+
 #include <WiFi.h>
 #include <WebServer.h>
 #include <ESP32Servo.h>
@@ -126,11 +132,13 @@ void setup() {
   Serial.println("WiFi OK.");
   Serial.print("WiFi's softAPIP: ");
   Serial.println(WiFi.softAPIP());
-
-  // 设置 WiFi 功率为一个中等稳定的值 (范围 8-20，11-13 较稳)
-  WiFi.setTxPower(WIFI_POWER_11dBm); 
-  // 禁用 WiFi 自动休眠（非常关键！休眠会导致首个包延迟极高）
-  WiFi.setSleep(false);
+  
+  // Set WiFi transmit power to a medium stable value (range 8-20, 11-13 is relatively stable)
+  // 將 WiFi 功率設定為中等且穩定的數值（範圍 8-20，11-13 較穩定）
+  WiFi.setTxPower (WIFI_POWER_11dBm);
+  // Disable WiFi auto-sleep (critical! Sleep will cause extremely high latency for the first packet)
+  // 關閉 WiFi 自動休眠（非常重要！休眠會造成第一個封包延遲極高）
+  WiFi.setSleep (false);
 
   server.on("/", []() { server.send(200, "text/html", htmlPage); });
   server.on("/forward", []() { moveForward(); server.send(200); });
